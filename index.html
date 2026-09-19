@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поступай KZ — Калькулятор ЕНТ и Грантов</title>
+    
+    <!-- Подтверждение владения сайтом в Google Search Console -->
+    <meta name="google-site-verification" content="v_qE13_4I6iHO4actouf1DeoCIwjNW5HT1ld0wz6t7s" />
+    <meta name="description" content="Рассчитай свои шансы на грант ЕНТ в Казахстане. Удобный подбор ВУЗов и всех специальностей (ГОП) по предметам.">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="app-header">
         <h1>Поступай KZ 🎓</h1>
-        <p>Калькулятор шансов на грант, специальности (ГОП) и каталог ВУЗов Казахстана</p>
+        <p>Калькулятор шансов на грант, направления (ГОП), профессии и ВУЗы Казахстана</p>
     </div>
 
     <!-- Навигация вкладками -->
@@ -26,7 +31,7 @@
         <!-- Вкладка 1: Калькулятор -->
         <section id="calc-tab" class="tab-content active">
             <div class="card">
-                <h2>Проверка шансов на грант</h2>
+                <h2>Проверка шансов на грант ЕНТ</h2>
                 <p class="subtitle">Укажи свои баллы и комбинацию предметов</p>
                 
                 <div class="form-group">
@@ -39,9 +44,9 @@
                     <select id="subject" onchange="updateGopOptions()">
                         <option value="phys-math">Физика + Математика</option>
                         <option value="math-inf">Математика + Информатика</option>
+                        <option value="bio-chem">Химия + Биология</option>
                         <option value="eng-hist">Иностранный язык + Всемирная история</option>
                         <option value="geo-math">География + Математика</option>
-                        <option value="bio-chem">Биология + Химия</option>
                         <option value="kaz-lit">Казахский / Русский язык + Литература</option>
                     </select>
                 </div>
@@ -58,7 +63,7 @@
         <section id="gop-tab" class="tab-content">
             <div class="card">
                 <h2>Группы образовательных программ (ГОП)</h2>
-                <p class="subtitle">Выбери предметы или конкретное направление, чтобы узнать проходные баллы и профессии:</p>
+                <p class="subtitle">Выбери предметы или конкретное направление, чтобы узнать проходные баллы и все профессии:</p>
 
                 <div class="form-group">
                     <label for="gopSelect">Направление (ГОП):</label>
@@ -78,7 +83,7 @@
             <div class="card">
                 <h2>Каталог ВУЗов Казахстана</h2>
                 <div class="form-group">
-                    <input type="text" id="searchInput" onkeyup="searchUniversity()" placeholder="🔍 Поиск по названию или городу (например: Алматы, Астана, Политех)...">
+                    <input type="text" id="searchInput" onkeyup="searchUniversity()" placeholder="🔍 Поиск по названию или городу (например: Алматы, Астана, КазНМУ, Политех)...">
                 </div>
                 
                 <div id="uniList" class="uni-grid">
@@ -99,6 +104,14 @@
                     </div>
 
                     <div class="uni-card">
+                        <h3>КазНМУ им. С.Д. Асфендиярова</h3>
+                        <span class="city-tag">📍 Алматы</span>
+                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~110–130</p>
+                        <p class="contact-info">📞 <a href="tel:+77273387027">+7 (727) 338-70-27</a></p>
+                        <p class="contact-info">🌐 <a href="https://kaznmu.edu.kz" target="_blank">kaznmu.edu.kz</a></p>
+                    </div>
+
+                    <div class="uni-card">
                         <h3>МУИТ (IITU)</h3>
                         <span class="city-tag">📍 Алматы</span>
                         <p class="score-info"><strong>Мин. балл на грант:</strong> ~100–120</p>
@@ -112,6 +125,14 @@
                         <p class="score-info"><strong>Мин. балл на грант:</strong> ~95–120</p>
                         <p class="contact-info">📞 <a href="tel:+77172703030">+7 (7172) 70-30-30</a></p>
                         <p class="contact-info">🌐 <a href="https://enu.kz" target="_blank">enu.kz</a></p>
+                    </div>
+
+                    <div class="uni-card">
+                        <h3>Медицинский университет Астана (МУА)</h3>
+                        <span class="city-tag">📍 Астана</span>
+                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~105–125</p>
+                        <p class="contact-info">📞 <a href="tel:+77172539424">+7 (7172) 53-94-24</a></p>
+                        <p class="contact-info">🌐 <a href="https://amu.kz" target="_blank">amu.kz</a></p>
                     </div>
 
                     <div class="uni-card">
@@ -140,7 +161,7 @@
                 
                 <details class="faq-item">
                     <summary>Какой минимальный пороговый балл для подачи на грант?</summary>
-                    <p>Для национальных ВУЗов (КазНУ, ЕНУ и др.) — минимум 75 баллов. Для остальных ВУЗов — от 50 баллов. По педагогическим направлениям — от 75 баллов.</p>
+                    <p>Для национальных ВУЗов (КазНУ, ЕНУ и др.) — минимум 75 баллов. Для остальных ВУЗов — от 50 баллов. По педагогическим направлениям и медицине — от 75 баллов.</p>
                 </details>
 
                 <details class="faq-item">

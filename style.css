@@ -130,7 +130,7 @@ input[type="number"]:focus, input[type="text"]:focus, select:focus {
     background-color: #fff;
 }
 
-/* Большая стильная кнопка */
+/* Большая кнопка */
 .btn-primary {
     width: 100%;
     background: linear-gradient(135deg, #4318ff, #11047a);
