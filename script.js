@@ -5,21 +5,24 @@ const universitiesData = [
   { name: "Satbayev University", city: "almaty", dorm: true, military: true, minScore: 70, paidScore: 50, price: "1 350 000 ₸", subjects: ["math-phys", "math-inf", "creative"] },
   { name: "МУИТ (IITU)", city: "almaty", dorm: true, military: true, minScore: 70, paidScore: 50, price: "1 150 000 ₸", subjects: ["math-inf", "math-phys"] },
   { name: "KBTU (КБТУ)", city: "almaty", dorm: true, military: false, minScore: 85, paidScore: 60, price: "1 500 000 ₸", subjects: ["math-inf", "math-phys"] },
-  { name: "КазНПУ им. Абая", city: "almaty", dorm: true, military: false, minScore: 70, paidScore: 50, price: "1 000 000 ₸", subjects: ["hist-world", "creative"] },
+  { name: "КазНПУ им. Абая", city: "almaty", dorm: true, military: false, minScore: 70, paidScore: 50, price: "1 000 000 ₸", subjects: ["hist-world", "chem-bio", "geog-math", "creative"] },
   { name: "КазНАИ им. Т. Жургенова", city: "almaty", dorm: true, military: false, minScore: 65, paidScore: 50, price: "1 100 000 ₸", subjects: ["creative"] },
   { name: "ЕНУ им. Л.Н. Гумилева", city: "astana", dorm: true, military: true, minScore: 75, paidScore: 50, price: "1 100 000 ₸", subjects: ["math-phys", "math-inf", "chem-bio", "geog-math", "hist-world", "creative"] },
   { name: "Astana IT University", city: "astana", dorm: true, military: true, minScore: 80, paidScore: 50, price: "1 250 000 ₸", subjects: ["math-inf"] },
-  { name: "ЮКУ им. М. Ауэзова", city: "shymkent", dorm: true, military: true, minScore: 60, paidScore: 50, price: "800 000 ₸", subjects: ["math-phys", "chem-bio", "math-inf", "geog-math", "hist-world", "creative"] }
+  { name: "Медицинский Университет Астана", city: "astana", dorm: true, military: true, minScore: 85, paidScore: 65, price: "1 400 000 ₸", subjects: ["chem-bio"] },
+  { name: "ЮКУ им. М. Ауэзова", city: "shymkent", dorm: true, military: true, minScore: 60, paidScore: 50, price: "800 000 ₸", subjects: ["math-phys", "chem-bio", "math-inf", "geog-math", "hist-world", "creative"] },
+  { name: "КарТУ им. Абылкаса Сагинова", city: "karaganda", dorm: true, military: true, minScore: 60, paidScore: 50, price: "850 000 ₸", subjects: ["math-phys", "geog-math"] }
 ];
 
 const gopDatabase = [
+  // --- 1. ФИЗИКА + МАТЕМАТИКА ---
   {
     subject: "math-phys",
-    nameRu: "B071 Горное дело и добыча полезных ископаемых",
-    nameKz: "B071 Тау-кен ісі және пайдалы қазбаларды өндіру",
-    nameEn: "B071 Mining and Mineral Extraction",
-    score: "~75–95",
-    jobs: ["Горный инженер", "Маркшейдер", "Инженер по буровым работам", "Геолог"]
+    nameRu: "B069 Производственные и обрабатывающие отрасли",
+    nameKz: "B069 Өндірістік және өңдеу салалары",
+    nameEn: "B069 Manufacturing and Processing",
+    score: "~65–85",
+    jobs: ["Инженер-технолог", "Специалист по автоматизации производства", "Машиностроитель", "Инженер по качеству"]
   },
   {
     subject: "math-phys",
@@ -27,23 +30,99 @@ const gopDatabase = [
     nameKz: "B070 Электрэнергетика және электротехника",
     nameEn: "B070 Electric Power Engineering",
     score: "~70–95",
-    jobs: ["Инженер-электрик", "Энергетик", "Специалист по ВИЭ"]
+    jobs: ["Инженер-электрик", "Энергетик", "Специалист по ВИЭ (возобновляемым источникам энергии)", "Проектировщик электросетей", "Релейщик"]
   },
   {
-    subject: "math-inf",
-    nameRu: "B062 Информационные технологии (IT)",
-    nameKz: "B062 Ақпараттық технологиялар (IT)",
-    nameEn: "B062 Information Technology (IT)",
-    score: "~85–125",
-    jobs: ["Software Developer (Программист)", "Data Scientist", "Cybersecurity Specialist", "Web-разработчик"]
+    subject: "math-phys",
+    nameRu: "B071 Горное дело и добыча полезных ископаемых",
+    nameKz: "B071 Тау-кен ісі және пайдалы қазбаларды өндіру",
+    nameEn: "B071 Mining and Mineral Extraction",
+    score: "~75–95",
+    jobs: ["Горный инженер", "Маркшейдер", "Инженер по буровым работам", "Геолог", "Взрывник", "Шахтный мастер"]
   },
   {
-    subject: "math-inf",
-    nameRu: "B061 ИТ-инженерные специальности",
-    nameKz: "B061 ІТ-инженерия мамандықтары",
-    nameEn: "B061 IT Engineering",
+    subject: "math-phys",
+    nameRu: "B072 Материаловедение и технологии",
+    nameKz: "B072 Материалдарды тану және технологиялар",
+    nameEn: "B072 Materials Science",
+    score: "~60–80",
+    jobs: ["Инженер-металлург", "Специалист по наноматериалам", "Испытатель металлов и сплавов"]
+  },
+  {
+    subject: "math-phys",
+    nameRu: "B073 Архитектура и строительные специальности",
+    nameKz: "B073 Сәулет және құрылыс",
+    nameEn: "B073 Architecture and Construction",
     score: "~75–110",
-    jobs: ["Сетевой инженер", "Системный администратор", "IoT-специалист"]
+    jobs: ["Инженер-строитель", "Проектировщик зданий и сооружений", "Смешанный архитектор-конструктор", "Сметчик", "Мастер строительного участка"]
+  },
+  {
+    subject: "math-phys",
+    nameRu: "B075 Кадастр и землеустройство",
+    nameKz: "B075 Кадастр және жерге орналастыру",
+    nameEn: "B075 Cadastre and Land Management",
+    score: "~65–85",
+    jobs: ["Землеустроитель", "Кадастровый инженер", "Геодезист", "Специалист GIS (ГИС-аналитик)"]
+  },
+  {
+    subject: "math-phys",
+    nameRu: "B076 Стандарты, метрология и сертификация",
+    nameKz: "B076 Стандарттау, метрология және сертификаттау",
+    nameEn: "B076 Metrology and Certification",
+    score: "~60–80",
+    jobs: ["Инженер по стандартизации", "Метролог", "Специалист по техническому контролю (OTK)"]
+  },
+
+  // --- 2. МАТЕМАТИКА + ИНФОРМАТИКА ---
+  {
+    subject: "math-inf",
+    nameRu: "B059 Коммуникации и коммуникационные технологии",
+    nameKz: "B059 Коммуникациялар және коммуникациялық технологиялар",
+    nameEn: "B059 Communications",
+    score: "~70–95",
+    jobs: ["Инженер телекоммуникаций", "Специалист по сетям 5G", "Инженер спутниковой и сотовой связи"]
+  },
+  {
+    subject: "math-inf",
+    nameRu: "B061 ИТ-инженерные специальности и аппаратное обеспечение",
+    nameKz: "B061 ІТ-инженерия мамандықтары",
+    nameEn: "B061 IT Engineering and Hardware",
+    score: "~75–110",
+    jobs: ["Сетевой инженер (Network Engineer)", "Системный администратор", "Инженер по микроэлектронике", "IoT-специалист (Интернет вещей)", "DevOps инженер"]
+  },
+  {
+    subject: "math-inf",
+    nameRu: "B062 Информационные технологии (Программирование и Data Science)",
+    nameKz: "B062 Ақпараттық технологиялар (Бағдарламалау)",
+    nameEn: "B062 Information Technology",
+    score: "~85–125",
+    jobs: ["Software Developer (Frontend / Backend / Fullstack)", "Data Scientist / Аналитик данных", "Cybersecurity Specialist (Кибербезопасность)", "Web-разработчик", "UI/UX Дизайнер", "QA Automation Engineer (Тестировщик)"]
+  },
+  {
+    subject: "math-inf",
+    nameRu: "B057 Информационная безопасность",
+    nameKz: "B057 Ақпараттық қауіпсіздік",
+    nameEn: "B057 Information Security",
+    score: "~90–120",
+    jobs: ["Специалист по защите информации", "Этический хакер (Pentester)", "Аналитик SOC", "Криптограф"]
+  },
+
+  // --- 3. ХИМИЯ + БИОЛОГИЯ ---
+  {
+    subject: "chem-bio",
+    nameRu: "B051 Биологические и смежные науки",
+    nameKz: "B051 Биологиялық және сабақтас ғылымдар",
+    nameEn: "B051 Biological Sciences",
+    score: "~70–95",
+    jobs: ["Биолог-исследователь", "Генетик", "Биотехнолог", "Микробиолог", "Лаборант"]
+  },
+  {
+    subject: "chem-bio",
+    nameRu: "B053 Химические науки и технологии",
+    nameKz: "B053 Химия ғылымдары және технологиялары",
+    nameEn: "B053 Chemical Sciences",
+    score: "~70–95",
+    jobs: ["Химик-технолог", "Инженер нефтехимического производства", "Фармацевтический химик", "Эколог-аналитик"]
   },
   {
     subject: "chem-bio",
@@ -51,7 +130,15 @@ const gopDatabase = [
     nameKz: "B084 Медицина",
     nameEn: "B084 Medicine",
     score: "~105–125",
-    jobs: ["Врач общей практики", "Хирург", "Педиатр", "Кардиолог"]
+    jobs: ["Врач общей практики (терапевт)", "Хирург", "Педиатр", "Кардиолог", "Анестезиолог-реаниматолог", "Невропатолог", "Акушер-гинеколог"]
+  },
+  {
+    subject: "chem-bio",
+    nameRu: "B089 Общественное здравоохранение и фармация",
+    nameKz: "B089 Қоғамдық денсаулық сақтау және фармация",
+    nameEn: "B089 Public Health and Pharmacy",
+    score: "~80–105",
+    jobs: ["Фармацевт-провизор", "Клинический фармаколог", "Эпидемиолог", "Санитарный врач", "Менеджер здравоохранения"]
   },
   {
     subject: "chem-bio",
@@ -59,15 +146,49 @@ const gopDatabase = [
     nameKz: "B091 Стоматология",
     nameEn: "B091 Dentistry",
     score: "~110–130",
-    jobs: ["Врач-стоматолог (терапевт, ортопед, хирург)"]
+    jobs: ["Врач-стоматолог терапевт", "Стоматолог-хирург", "Стоматолог-ортопед", "Ортодонт"]
+  },
+  {
+    subject: "chem-bio",
+    nameRu: "B092 Стоматология и сестринское дело (Высшее сестринское дело)",
+    nameKz: "B092 Мейіргер ісі",
+    nameEn: "B092 Nursing",
+    score: "~70–90",
+    jobs: ["Менеджер сестринского дела", "Главная медсестра", "Специалист по уходу за пациентами"]
+  },
+  {
+    subject: "chem-bio",
+    nameRu: "B093 Ветеринария",
+    nameKz: "B093 Ветеринария",
+    nameEn: "B093 Veterinary",
+    score: "~65–90",
+    jobs: ["Ветеринарный врач", "Ветеринарный инспектор", "Эпизоотолог", "Хирург для животных"]
+  },
+  {
+    subject: "chem-bio",
+    nameRu: "B052 Экология и охрана окружающей среды",
+    nameKz: "B052 Экология және қоршаған ортаны қорғау",
+    nameEn: "B052 Ecology",
+    score: "~70–95",
+    jobs: ["Эколог-аудитор", "Инженер по охране окружающей среды", "Специалист по утилизации отходов"]
+  },
+
+  // --- 4. ГЕОГРАФИЯ + МАТЕМАТИКА ---
+  {
+    subject: "geog-math",
+    nameRu: "B041 Бизнес и администрирование",
+    nameKz: "B041 Бизнес және әкімшілендіру",
+    nameEn: "B041 Business and Administration",
+    score: "~75–105",
+    jobs: ["Предприниматель", "Бизнес-аналитик", "Коммерческий директор", "Антикризисный управляющий", "Проектный менеджер"]
   },
   {
     subject: "geog-math",
-    nameRu: "B044 Финансы, экономика, банковское дело",
-    nameKz: "B044 Қаржы, экономика, банк ісі",
+    nameRu: "B044 Финансы, экономика, банковское дело и учет",
+    nameKz: "B044 Қаржы, экономика, банк ісі және есеп",
     nameEn: "B044 Finance, Economics, Banking",
     score: "~85–115",
-    jobs: ["Финансовый аналитик", "Экономист", "Банкир", "Инвестиционный менеджер"]
+    jobs: ["Финансовый аналитик", "Экономист", "Банкир", "Инвестиционный менеджер", "Бухгалтер-аудитор", "Риск-менеджер"]
   },
   {
     subject: "geog-math",
@@ -75,47 +196,131 @@ const gopDatabase = [
     nameKz: "B046 Менеджмент және маркетинг",
     nameEn: "B046 Management and Marketing",
     score: "~80–110",
-    jobs: ["Маркетолог", "Project Manager", "HR-менеджер", "Логист"]
+    jobs: ["Маркетолог", "SMM-менеджер / Таргетолог", "Бренд-менеджер", "HR-менеджер", "PR-специалист", "Комьюнити-менеджер"]
   },
+  {
+    subject: "geog-math",
+    nameRu: "B095 Транспортные услуги (Логистика и туризм)",
+    nameKz: "B095 Көлік қызметтері (Логистика және туризм)",
+    nameEn: "B095 Transport Services and Logistics",
+    score: "~70–95",
+    jobs: ["Логист", "Специалист по цепям поставок (Supply Chain Manager)", "Менеджер по туризму", "Отельер", "Экспедитор грузов"]
+  },
+  {
+    subject: "geog-math",
+    nameRu: "B045 Аудит и налогообложение",
+    nameKz: "B045 Аудит және салық салу",
+    nameEn: "B045 Audit and Taxation",
+    score: "~80–110",
+    jobs: ["Налоговый консультант", "Финансовый аудитор", "Налоговый инспектор", "Главный бухгалтер"]
+  },
+  {
+    subject: "geog-math",
+    nameRu: "B042 Журналистика и издательское дело",
+    nameKz: "B042 Журналистика және баспа ісі",
+    nameEn: "B042 Journalism",
+    score: "~75–100",
+    jobs: ["Журналист-международник", "Редактор", "Копирайтер", "Контент-менеджер"]
+  },
+
+  // --- 5. АНГЛИЙСКИЙ + ВСЕМИРНАЯ ИСТОРИЯ ---
   {
     subject: "hist-world",
     nameRu: "B038 Право (Юриспруденция)",
     nameKz: "B038 Құқықтану (Юриспруденция)",
-    nameEn: "B038 Law (Jurisprudence)",
+    nameEn: "B038 Law",
     score: "~100–125",
-    jobs: ["Юрист", "Адвокат", "Судья", "Прокурор"]
+    jobs: ["Юрист", "Адвокат", "Судья", "Прокурор", "Юрисконсульт международной компании", "Нотариус", "Следователь"]
   },
   {
     subject: "hist-world",
-    nameRu: "B011 Педагогика по языковым специальностям",
+    nameRu: "B011 Педагогика по языковым специальностям (Инг, Каз, Рус)",
     nameKz: "B011 Тілдік мамандықтар бойынша педагогика",
     nameEn: "B011 Language Teacher Education",
     score: "~80–105",
-    jobs: ["Учитель иностранного языка", "Лингвист-переводчик", "Преподаватель"]
+    jobs: ["Учитель английского/иностранного языка", "Лингвист-переводчик", "Репетитор", "Преподаватель IELTS/TOEFL", "Методист"]
+  },
+  {
+    subject: "hist-world",
+    nameRu: "B035 Международные отношения и регионоведение",
+    nameKz: "B035 Халықаралық қатынастар және өңіртану",
+    nameEn: "B035 International Relations",
+    score: "~95–120",
+    jobs: ["Дипломат", "Специалист по международным связям", "Политический аналитик", "Консул", "Этнограф-востоковед"]
+  },
+  {
+    subject: "hist-world",
+    nameRu: "B036 Журналистика и информация",
+    nameKz: "B036 Журналистика және ақпарат",
+    nameEn: "B036 Journalism and Information",
+    score: "~75–100",
+    jobs: ["Телеведущий", "Спортивный журналист", "Репортер", "Видеопродюсер", "PR-менеджер"]
+  },
+  {
+    subject: "hist-world",
+    nameRu: "B034 История и археология",
+    nameKz: "B034 Тарих және археология",
+    nameEn: "B034 History and Archaeology",
+    score: "~70–90",
+    jobs: ["Историк-исследователь", "Археолог", "Музейный куратор", "Экскурсовод-гид"]
+  },
+  {
+    subject: "hist-world",
+    nameRu: "B037 Психология",
+    nameKz: "B037 Психология",
+    nameEn: "B037 Psychology",
+    score: "~85–110",
+    jobs: ["Психолог", "Психотерапевт", "HR-психолог", "Детский психолог", "Карьерный консультант"]
+  },
+
+  // --- 6. ТВОРЧЕСКИЙ ЭКЗАМЕН ---
+  {
+    subject: "creative",
+    nameRu: "B029 Изобразительное искусство и прикладные ремесла",
+    nameKz: "B029 Бейнелеу өнері және қолөнер",
+    nameEn: "B029 Fine Arts",
+    score: "~65–90 (творческий + ЕНТ)",
+    jobs: ["Художник-живописец", "Иллюстратор", "Концепт-художник для игр и кино", "Скульптор", "Мастер декоративно-прикладного искусства"]
   },
   {
     subject: "creative",
     nameRu: "B030 Аудиовизуальные средства и медиапроизводство",
     nameKz: "B030 Аудиовизуалды құралдар және медиа өндіріс",
-    nameEn: "B030 Audiovisual Media Production",
+    nameEn: "B030 Audiovisual Media",
     score: "~70–100 (творческий + ЕНТ)",
-    jobs: ["Режиссер кино", "Видеомонтажер", "Моушн-дизайнер"]
+    jobs: ["Режиссер кино, клипов и телевидения", "Оператор-постановщик", "Видеомонтажер (Video Editor)", "Звукорежиссер", "Моушн-дизайнер"]
   },
   {
     subject: "creative",
-    nameRu: "B031 Мода, дизайн и интерьер",
+    nameRu: "B031 Мода, дизайн, графика и интерьер",
     nameKz: "B031 Сән, дизайн және интерьер",
-    nameEn: "B031 Fashion, Interior and Graphic Design",
+    nameEn: "B031 Fashion and Graphic Design",
     score: "~70–105 (творческий + ЕНТ)",
-    jobs: ["Графический дизайнер", "Дизайнер интерьера", "Фэшн-дизайнер (модельер)"]
+    jobs: ["Графический дизайнер", "Дизайнер интерьера", "Фэшн-дизайнер (модельер)", "UX/UI Дизайнер интерфейсов", "Ландшафтный дизайнер"]
   },
   {
     subject: "creative",
-    nameRu: "B032 Архитектура",
-    nameKz: "B032 Архитектура",
+    nameRu: "B032 Архитектура и градостроительство",
+    nameKz: "B032 Сәулет және қала құрылысы",
     nameEn: "B032 Architecture",
     score: "~80–115 (творческий + ЕНТ)",
-    jobs: ["Архитектор-проектировщик", "Градостроитель", "Ландшафтный архитектор"]
+    jobs: ["Архитектор-градостроитель", "Главный архитектор проекта (ГАП)", "Ландшафтный архитектор", "Реставратор памятников архитектуры"]
+  },
+  {
+    subject: "creative",
+    nameRu: "B028 Музыкальное искусство и исполнение",
+    nameKz: "B028 Музыка өнері",
+    nameEn: "B028 Music Art",
+    score: "~65–95 (творческий + ЕНТ)",
+    jobs: ["Профессиональный музыкант", "Композитор", "Аранжировщик", "Дирижер", "Преподаватель музыки"]
+  },
+  {
+    subject: "creative",
+    nameRu: "B033 Хореография и режиссура представлений",
+    nameKz: "B033 Хореография және қойылым режиссурасы",
+    nameEn: "B033 Choreography",
+    score: "~65–90 (творческий + ЕНТ)",
+    jobs: ["Хореограф-постановщик", "Профессиональный танцор", "Режиссер массовых мероприятий и шоу"]
   }
 ];
 
@@ -225,7 +430,7 @@ function updateGopList() {
     const container = document.getElementById('gop-results-container');
     container.innerHTML = "";
 
-    const filteredGops = gopDatabase.export ? [] : gopDatabase.filter(g => g.subject === selectedSubject);
+    const filteredGops = gopDatabase.filter(g => g.subject === selectedSubject);
 
     if (filteredGops.length === 0) {
         container.innerHTML = `<p>По данной комбинации предметов пока нет направлений.</p>`;
@@ -234,8 +439,10 @@ function updateGopList() {
 
     filteredGops.forEach(gop => {
         let name = currentLang === 'kz' ? gop.nameKz : (currentLang === 'en' ? gop.nameEn : gop.nameRu);
+        
         let card = document.createElement('div');
         card.style.cssText = "background:#f8f9fa; border:1px solid #dcdfe6; padding:15px; border-radius:10px; margin-bottom:15px;";
+        
         let jobsHtml = gop.jobs.map(j => `<li>${j}</li>`).join('');
         
         card.innerHTML = `
