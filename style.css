@@ -1,116 +1,156 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
     color: #333;
-}
-
-header {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: white;
-    text-align: center;
-    padding: 40px 20px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.2em;
-}
-
-header p {
-    margin-top: 10px;
-    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }
 
 .container {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.card {
-    background: white;
+    width: 100%;
+    max-width: 650px;
+    background: #ffffff;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* Переключатель языков */
+.lang-switch {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.lang-switch button {
+    background: #e0e0e0;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    transition: 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.lang-switch button.active {
+    background: #007bff;
+    color: white;
+}
+
+header {
+    text-align: center;
     margin-bottom: 25px;
 }
 
-h2 {
-    color: #1e3c72;
-    margin-top: 0;
+header h1 {
+    color: #007bff;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #666;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 15px;
 }
 
 label {
     display: block;
-    margin: 15px 0 5px;
     font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
 }
 
-input[type="number"], input[type="text"], select {
+select, input[type="number"] {
     width: 100%;
-    padding: 12px;
+    padding: 10px 12px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    box-sizing: border-box;
     font-size: 15px;
+    background-color: #fff;
 }
 
-button {
+.filters-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.filters-group label {
+    font-weight: normal;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+button#btn-calc {
     width: 100%;
-    background-color: #27ae60;
+    padding: 12px;
+    background-color: #007bff;
     color: white;
     border: none;
-    padding: 14px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 20px;
     transition: background 0.2s;
-}
-
-button:hover {
-    background-color: #219150;
-}
-
-.result-box {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #eef7ed;
-    border-left: 5px solid #27ae60;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-.uni-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 15px;
-}
-
-.uni-item {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.uni-item:last-child {
-    border-bottom: none;
-}
-
-.tag {
-    background-color: #e3f2fd;
-    color: #1976d2;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: bold;
-}button, .lang-btn {
-    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+}
+
+button#btn-calc:hover {
+    background-color: #0056b3;
+}
+
+.results-container {
+    margin-top: 25px;
+}
+
+.uni-card {
+    background: #f8f9fa;
+    border-left: 4px solid #007bff;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+}
+
+.uni-card h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.uni-card p {
+    font-size: 13px;
+    color: #555;
+    margin-top: 4px;
+}
+
+.no-results {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+    font-size: 15px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 12px;
+    color: #999;
 }
