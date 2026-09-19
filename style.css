@@ -13,7 +13,6 @@ header {
     padding: 25px 20px 30px;
 }
 
-/* Кнопки смены языка — большие и яркие */
 .lang-switch {
     display: flex;
     justify-content: center;
@@ -117,8 +116,7 @@ input[type="number"], select {
     outline: none;
 }
 
-/* Главная кнопка «Рассчитать» — огромная и заметная */
-button[onclick="calculateGrant()"], .calc-main-btn {
+button[onclick="calculateGrant()"] {
     width: 100%;
     background: linear-gradient(135deg, #2e7d32, #43a047);
     color: white;
@@ -140,22 +138,7 @@ button[onclick="calculateGrant()"]:hover {
 
 .result-box {
     margin-top: 20px;
-    padding: 20px;
     border-radius: 10px;
     font-size: 1em;
     line-height: 1.6;
-}
-
-.uni-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 15px;
-}
-
-.uni-item-card {
-    background: #f8f9fa;
-    border: 1px solid #e0e0e0;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 12px;
 }

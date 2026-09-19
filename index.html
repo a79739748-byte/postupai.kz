@@ -3,99 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поступай KZ — Калькулятор шансов на грант ЕНТ</title>
+    <title>Postupai.kz - Навигатор по ВУЗам</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
         <div class="lang-switch">
             <button onclick="changeLanguage('ru')" class="lang-btn active" id="btn-ru">РУС</button>
             <button onclick="changeLanguage('kz')" class="lang-btn" id="btn-kz">ҚАЗ</button>
             <button onclick="changeLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
         </div>
-
-        <h1>Поступай KZ 🎓</h1>
-        <p data-i18n="subtitle">Рассчитай свои шансы на грант и найди подходящий ВУЗ в Казахстане</p>
-        
+        <h1 data-i18n="calcTitle">Postupai.kz</h1>
+        <p data-i18n="subtitle">Рассчитай шансы на грант, платное и выбери ВУЗ</p>
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('calc')" data-i18n="tabCalc">Калькулятор</button>
             <button class="tab-btn" onclick="switchTab('gop')" data-i18n="tabGop">ГОП и Профессии</button>
         </div>
     </header>
 
-    <main class="container">
+    <div class="container">
         <!-- Вкладка 1: Калькулятор -->
-        <section id="calc-tab" class="tab-content active">
+        <section id="calc-tab" class="tab-content">
             <div class="card">
-                <h2 data-i18n="calcTitle">Проверка шансов на грант ЕНТ</h2>
+                <h2 data-i18n="calcTitle">Проверка шансов ЕНТ (Грант / Платка / Порог)</h2>
                 
-                <label for="ent-score" data-i18n="labelScore">Твой общий балл ЕНТ (из 140):</label>
-                <input type="number" id="ent-score" placeholder="Например: 105" min="0" max="140">
+                <label data-i18n="labelScore" for="ent-score">Твой общий балл ЕНТ (из 140):</label>
+                <input type="number" id="ent-score" min="0" max="140" placeholder="Например: 95">
 
-                <label for="subject-select" data-i18n="labelSubject">Комбинация профильных предметов:</label>
+                <label data-i18n="labelSubject" for="subject-select">Комбинация профильных предметов:</label>
                 <select id="subject-select">
                     <option value="math-phys" data-i18n="optPhysMath">Физика + Математика</option>
                     <option value="math-inf" data-i18n="optMathInf">Математика + Информатика</option>
                     <option value="chem-bio" data-i18n="optChemBio">Химия + Биология</option>
                     <option value="geog-math" data-i18n="optGeoMath">География + Математика</option>
                     <option value="hist-world" data-i18n="optEngHist">Английский + Всемирная история</option>
+                    <option value="creative" data-i18n="optCreative">🎨 Творческий экзамен</option>
                 </select>
 
-                <label for="city-select" data-i18n="labelCity">Выберите город:</label>
+                <label data-i18n="labelCity" for="city-select">Выберите город:</label>
                 <select id="city-select">
                     <option value="all" data-i18n="optAllCities">Все города Казахстана</option>
                     <option value="almaty">Алматы</option>
                     <option value="astana">Астана</option>
                     <option value="shymkent">Шымкент</option>
                     <option value="karaganda">Караганда</option>
-                    <option value="aktobe">Актобе</option>
-                    <option value="vko">Усть-Каменогорск</option>
-                    <option value="semey">Семей</option>
-                    <option value="pavlodar">Павлодар</option>
-                    <option value="kostanay">Костанай</option>
-                    <option value="taraz">Тараз</option>
-                    <option value="kYZYLORDA">Кызылорда</option>
-                    <option value="uralsk">Уральск</option>
-                    <option value="atyrau">Атырау</option>
                 </select>
 
-                <div class="checkbox-group" style="margin: 20px 0;">
-                    <label style="display:block; margin-bottom:8px;"><input type="checkbox" id="dorm-check"> <span data-i18n="checkDorm">🏢 Нужно общежитие</span></label>
-                    <label style="display:block; margin-bottom:8px;"><input type="checkbox" id="military-check"> <span data-i18n="checkMil">🪖 Нужна военная кафедра</span></label>
-                    <label style="display:block;"><input type="checkbox" id="rural-check"> <span data-i18n="checkRural">🌾 Есть сельская квота</span></label>
+                <div style="margin-top: 15px;">
+                    <label><input type="checkbox" id="dorm-check"> <span data-i18n="checkDorm">🏢 Нужно общежитие</span></label>
+                    <label><input type="checkbox" id="military-check"> <span data-i18n="checkMil">🪖 Нужна военная кафедра</span></label>
+                    <label><input type="checkbox" id="rural-check"> <span data-i18n="checkRural">🌾 Есть сельская квота (+5 баллов)</span></label>
                 </div>
 
-                <button onclick="calculateGrant()" data-i18n="btnCalc">Рассчитать шансы</button>
+                <button onclick="calculateGrant()" data-i18n="btnCalc">🚀 Рассчитать шансы и доступные ВУЗы</button>
 
-                <div id="calc-result" style="margin-top: 20px;"></div>
+                <div id="calc-result" class="result-box"></div>
             </div>
         </section>
 
         <!-- Вкладка 2: ГОП и Профессии -->
         <section id="gop-tab" class="tab-content" style="display: none;">
             <div class="card">
-                <h2 data-i18n="gopTitle">Группы образовательных программ (ГОП)</h2>
-                <label data-i18n="gopLabel">Выберите направление:</label>
-                <select id="gop-select" onchange="updateGopInfo()">
-                    <option value="v071">B071 Горное дело и добыча полезных ископаемых</option>
-                    <option value="v062">B062 Информационные технологии (IT)</option>
-                    <option value="v059">B059 Коммуникации и связи</option>
+                <h2 data-i18n="gopTitle">Выбор профессий по профильным предметам</h2>
+                
+                <label data-i18n="gopSubLabel">Выберите свои профильные предметы:</label>
+                <select id="gop-subject-select" onchange="updateGopList()">
+                    <option value="math-phys">Физика + Математика</option>
+                    <option value="math-inf">Математика + Информатика</option>
+                    <option value="chem-bio">Химия + Биология</option>
+                    <option value="geog-math">География + Математика</option>
+                    <option value="hist-world">Английский + Всемирная история</option>
+                    <option value="creative">🎨 Творческий экзамен</option>
                 </select>
 
-                <div id="gop-info-box" class="result-box" style="margin-top: 20px;">
-                    <h3 id="gop-name">B071 Горное дело и добыча полезных ископаемых</h3>
-                    <p><strong>Проходной балл на грант (ориентир прошлых лет):</strong> ~75–92</p>
-                    <p><strong>Доступные профессии:</strong></p>
-                    <ul id="gop-professions">
-                        <li>Горный инженер</li>
-                        <li>Маркшейдер</li>
-                        <li>Инженер по буровым работам</li>
-                    </ul>
-                </div>
+                <div id="gop-results-container" style="margin-top: 20px;"></div>
             </div>
         </section>
-    </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
