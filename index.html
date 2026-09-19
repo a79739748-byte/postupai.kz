@@ -3,179 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поступай KZ — Калькулятор ЕНТ и Грантов</title>
-    
-    <!-- Подтверждение владения сайтом в Google Search Console -->
-    <meta name="google-site-verification" content="v_qE13_4I6iHO4actouf1DeoCIwjNW5HT1ld0wz6t7s" />
-    <meta name="description" content="Рассчитай свои шансы на грант ЕНТ в Казахстане. Удобный подбор ВУЗов и всех специальностей (ГОП) по предметам.">
-    
+    <title>Поступай KZ — Калькулятор шансов на грант ЕНТ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="app-header">
+    <header>
+        <div class="lang-switch">
+            <button onclick="changeLanguage('ru')" class="lang-btn active" id="btn-ru">РУС</button>
+            <button onclick="changeLanguage('kz')" class="lang-btn" id="btn-kz">ҚАЗ</button>
+            <button onclick="changeLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
+        </div>
+
         <h1>Поступай KZ 🎓</h1>
-        <p>Калькулятор шансов на грант, направления (ГОП), профессии и ВУЗы Казахстана</p>
-    </div>
+        <p data-i18n="subtitle">Рассчитай свои шансы на грант и найди подходящий ВУЗ в Казахстане</p>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('calc')" data-i18n="tabCalc">Калькулятор</button>
+            <button class="tab-btn" onclick="switchTab('gop')" data-i18n="tabGop">ГОП и Профессии</button>
+        </div>
+    </header>
 
-    <!-- Навигация вкладками -->
-    <nav class="tabs-nav">
-        <button class="tab-btn active" onclick="switchTab('calc-tab', this)">🧮 Калькулятор</button>
-        <button class="tab-btn" onclick="switchTab('gop-tab', this)">🎯 ГОП и Профессии</button>
-        <button class="tab-btn" onclick="switchTab('uni-tab', this)">🏛 ВУЗы и Контакты</button>
-        <button class="tab-btn" onclick="switchTab('faq-tab', this)">❓ Вопросы (FAQ)</button>
-    </nav>
-
-    <main class="main-container">
-
+    <main class="container">
         <!-- Вкладка 1: Калькулятор -->
         <section id="calc-tab" class="tab-content active">
             <div class="card">
-                <h2>Проверка шансов на грант ЕНТ</h2>
-                <p class="subtitle">Укажи свои баллы и комбинацию предметов</p>
+                <h2 data-i18n="calcTitle">Проверка шансов на грант ЕНТ</h2>
                 
-                <div class="form-group">
-                    <label for="score">Твой общий балл ЕНТ (из 140):</label>
-                    <input type="number" id="score" placeholder="Например: 105" min="0" max="140">
+                <label for="ent-score" data-i18n="labelScore">Твой общий балл ЕНТ (из 140):</label>
+                <input type="number" id="ent-score" placeholder="Например: 105" min="0" max="140">
+
+                <label for="subject-select" data-i18n="labelSubject">Комбинация профильных предметов:</label>
+                <select id="subject-select">
+                    <option value="math-phys" data-i18n="optPhysMath">Физика + Математика</option>
+                    <option value="math-inf" data-i18n="optMathInf">Математика + Информатика</option>
+                    <option value="chem-bio" data-i18n="optChemBio">Химия + Биология</option>
+                    <option value="geog-math" data-i18n="optGeoMath">География + Математика</option>
+                    <option value="hist-world" data-i18n="optEngHist">Английский + Всемирная история</option>
+                </select>
+
+                <label for="city-select" data-i18n="labelCity">Выберите город:</label>
+                <select id="city-select">
+                    <option value="all" data-i18n="optAllCities">Все города Казахстана</option>
+                    <option value="almaty">Алматы</option>
+                    <option value="astana">Астана</option>
+                    <option value="shymkent">Шымкент</option>
+                    <option value="karaganda">Караганда</option>
+                    <option value="aktobe">Актобе</option>
+                    <option value="vko">Усть-Каменогорск</option>
+                    <option value="semey">Семей</option>
+                    <option value="pavlodar">Павлодар</option>
+                    <option value="kostanay">Костанай</option>
+                    <option value="taraz">Тараз</option>
+                    <option value="kYZYLORDA">Кызылорда</option>
+                    <option value="uralsk">Уральск</option>
+                    <option value="atyrau">Атырау</option>
+                </select>
+
+                <div class="checkbox-group" style="margin: 20px 0;">
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox" id="dorm-check"> <span data-i18n="checkDorm">🏢 Нужно общежитие</span></label>
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox" id="military-check"> <span data-i18n="checkMil">🪖 Нужна военная кафедра</span></label>
+                    <label style="display:block;"><input type="checkbox" id="rural-check"> <span data-i18n="checkRural">🌾 Есть сельская квота</span></label>
                 </div>
 
-                <div class="form-group">
-                    <label for="subject">Комбинация профильных предметов:</label>
-                    <select id="subject" onchange="updateGopOptions()">
-                        <option value="phys-math">Физика + Математика</option>
-                        <option value="math-inf">Математика + Информатика</option>
-                        <option value="bio-chem">Химия + Биология</option>
-                        <option value="eng-hist">Иностранный язык + Всемирная история</option>
-                        <option value="geo-math">География + Математика</option>
-                        <option value="kaz-lit">Казахский / Русский язык + Литература</option>
-                    </select>
-                </div>
+                <button onclick="calculateGrant()" data-i18n="btnCalc">Рассчитать шансы</button>
 
-                <button class="btn-primary" onclick="checkChances()">🚀 Рассчитать шансы на грант</button>
-
-                <div id="result" class="result-box">
-                    Введите балл и нажмите «Рассчитать шансы».
-                </div>
+                <div id="calc-result" style="margin-top: 20px;"></div>
             </div>
         </section>
 
         <!-- Вкладка 2: ГОП и Профессии -->
-        <section id="gop-tab" class="tab-content">
+        <section id="gop-tab" class="tab-content" style="display: none;">
             <div class="card">
-                <h2>Группы образовательных программ (ГОП)</h2>
-                <p class="subtitle">Выбери предметы или конкретное направление, чтобы узнать проходные баллы и все профессии:</p>
+                <h2 data-i18n="gopTitle">Группы образовательных программ (ГОП)</h2>
+                <label data-i18n="gopLabel">Выберите направление:</label>
+                <select id="gop-select" onchange="updateGopInfo()">
+                    <option value="v071">B071 Горное дело и добыча полезных ископаемых</option>
+                    <option value="v062">B062 Информационные технологии (IT)</option>
+                    <option value="v059">B059 Коммуникации и связи</option>
+                </select>
 
-                <div class="form-group">
-                    <label for="gopSelect">Направление (ГОП):</label>
-                    <select id="gopSelect" onchange="showGopDetails()">
-                        <!-- Заполняется автоматически через JavaScript -->
-                    </select>
-                </div>
-
-                <div id="gopDetails" class="gop-details-box">
-                    <!-- Заполняется динамически -->
+                <div id="gop-info-box" class="result-box" style="margin-top: 20px;">
+                    <h3 id="gop-name">B071 Горное дело и добыча полезных ископаемых</h3>
+                    <p><strong>Проходной балл на грант (ориентир прошлых лет):</strong> ~75–92</p>
+                    <p><strong>Доступные профессии:</strong></p>
+                    <ul id="gop-professions">
+                        <li>Горный инженер</li>
+                        <li>Маркшейдер</li>
+                        <li>Инженер по буровым работам</li>
+                    </ul>
                 </div>
             </div>
         </section>
-
-        <!-- Вкладка 3: Каталог ВУЗов -->
-        <section id="uni-tab" class="tab-content">
-            <div class="card">
-                <h2>Каталог ВУЗов Казахстана</h2>
-                <div class="form-group">
-                    <input type="text" id="searchInput" onkeyup="searchUniversity()" placeholder="🔍 Поиск по названию или городу (например: Алматы, Астана, КазНМУ, Политех)...">
-                </div>
-                
-                <div id="uniList" class="uni-grid">
-                    <div class="uni-card">
-                        <h3>Satbayev University (Политех)</h3>
-                        <span class="city-tag">📍 Алматы</span>
-                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~85–110</p>
-                        <p class="contact-info">📞 <a href="tel:+77273201212">+7 (727) 320-12-12</a></p>
-                        <p class="contact-info">🌐 <a href="https://satbayev.university" target="_blank">satbayev.university</a></p>
-                    </div>
-
-                    <div class="uni-card">
-                        <h3>КазНУ им. аль-Фараби</h3>
-                        <span class="city-tag">📍 Алматы</span>
-                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~105–125</p>
-                        <p class="contact-info">📞 <a href="tel:+77273773330">+7 (727) 377-33-30</a></p>
-                        <p class="contact-info">🌐 <a href="https://kaznu.kz" target="_blank">kaznu.kz</a></p>
-                    </div>
-
-                    <div class="uni-card">
-                        <h3>КазНМУ им. С.Д. Асфендиярова</h3>
-                        <span class="city-tag">📍 Алматы</span>
-                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~110–130</p>
-                        <p class="contact-info">📞 <a href="tel:+77273387027">+7 (727) 338-70-27</a></p>
-                        <p class="contact-info">🌐 <a href="https://kaznmu.edu.kz" target="_blank">kaznmu.edu.kz</a></p>
-                    </div>
-
-                    <div class="uni-card">
-                        <h3>МУИТ (IITU)</h3>
-                        <span class="city-tag">📍 Алматы</span>
-                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~100–120</p>
-                        <p class="contact-info">📞 <a href="tel:+77272445103">+7 (727) 244-51-03</a></p>
-                        <p class="contact-info">🌐 <a href="https://iitu.edu.kz" target="_blank">iitu.edu.kz</a></p>
-                    </div>
-
-                    <div class="uni-card">
-                        <h3>ЕНУ им. Л.Н. Гумилева</h3>
-                        <span class="city-tag">📍 Астана</span>
-                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~95–120</p>
-                        <p class="contact-info">📞 <a href="tel:+77172703030">+7 (7172) 70-30-30</a></p>
-                        <p class="contact-info">🌐 <a href="https://enu.kz" target="_blank">enu.kz</a></p>
-                    </div>
-
-                    <div class="uni-card">
-                        <h3>Медицинский университет Астана (МУА)</h3>
-                        <span class="city-tag">📍 Астана</span>
-                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~105–125</p>
-                        <p class="contact-info">📞 <a href="tel:+77172539424">+7 (7172) 53-94-24</a></p>
-                        <p class="contact-info">🌐 <a href="https://amu.kz" target="_blank">amu.kz</a></p>
-                    </div>
-
-                    <div class="uni-card">
-                        <h3>AITU (Astana IT University)</h3>
-                        <span class="city-tag">📍 Астана</span>
-                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~110–125</p>
-                        <p class="contact-info">📞 <a href="tel:+77172645710">+7 (7172) 64-57-10</a></p>
-                        <p class="contact-info">🌐 <a href="https://astanait.edu.kz" target="_blank">astanait.edu.kz</a></p>
-                    </div>
-
-                    <div class="uni-card">
-                        <h3>АУЭС (Energo University)</h3>
-                        <span class="city-tag">📍 Алматы</span>
-                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~80–100</p>
-                        <p class="contact-info">📞 <a href="tel:+77273231175">+7 (727) 323-11-75</a></p>
-                        <p class="contact-info">🌐 <a href="https://aues.kz" target="_blank">aues.kz</a></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Вкладка 4: FAQ -->
-        <section id="faq-tab" class="tab-content">
-            <div class="card">
-                <h2>Часто задаваемые вопросы (FAQ)</h2>
-                
-                <details class="faq-item">
-                    <summary>Какой минимальный пороговый балл для подачи на грант?</summary>
-                    <p>Для национальных ВУЗов (КазНУ, ЕНУ и др.) — минимум 75 баллов. Для остальных ВУЗов — от 50 баллов. По педагогическим направлениям и медицине — от 75 баллов.</p>
-                </details>
-
-                <details class="faq-item">
-                    <summary>Сколько ВУЗов и ГОП можно указать в конкурсе грантов?</summary>
-                    <p>В заявке на грант вы можете указать до 4 групп образовательных программ (ГОП).</p>
-                </details>
-
-                <details class="faq-item">
-                    <summary>Что такое сельская квота?</summary>
-                    <p>Сельская квота даёт преимущество при распределении грантов выпускникам сельских школ (35% от грантов по сельским специальностям).</p>
-                </details>
-            </div>
-        </section>
-
     </main>
 
     <script src="script.js"></script>
