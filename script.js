@@ -1,40 +1,31 @@
 let currentLang = 'ru';
 
+// База ВУЗов с ценами на платное отделение (в тенге за год) и мин. баллами
 const universitiesData = [
-  { name: "КазНУ им. аль-Фараби", city: "almaty", dorm: true, military: true, minScore: 75, subjects: ["math-phys", "math-inf", "chem-bio", "geog-math", "hist-world"] },
-  { name: "КазНИТУ им. К.И. Сатпаева (Satbayev University)", city: "almaty", dorm: true, military: true, minScore: 65, subjects: ["math-phys", "math-inf"] },
-  { name: "МУИТ (IITU)", city: "almaty", dorm: true, military: true, minScore: 70, subjects: ["math-inf", "math-phys"] },
-  { name: "KBTU (КБТУ)", city: "almaty", dorm: true, military: false, minScore: 85, subjects: ["math-inf", "math-phys"] },
-  { name: "КазНПУ им. Абая", city: "almaty", dorm: true, military: false, minScore: 75, subjects: ["math-phys", "chem-bio"] },
-  { name: "КазНАУ (Аграрный)", city: "almaty", dorm: true, military: true, minScore: 60, subjects: ["chem-bio", "math-phys"] },
-  { name: "АЭУЭС (Энергетический)", city: "almaty", dorm: true, military: true, minScore: 60, subjects: ["math-phys"] },
-  { name: "ЕНУ им. Л.Н. Гумилева", city: "astana", dorm: true, military: true, minScore: 75, subjects: ["math-phys", "math-inf", "chem-bio", "geog-math"] },
-  { name: "Nazarbayev University (NU)", city: "astana", dorm: true, military: false, minScore: 110, subjects: ["math-phys", "chem-bio"] },
-  { name: "КазАТУ им. С. Сейфуллина", city: "astana", dorm: true, military: true, minScore: 60, subjects: ["math-phys", "chem-bio"] },
-  { name: "Astana IT University (AITU)", city: "astana", dorm: true, military: true, minScore: 80, subjects: ["math-inf"] },
-  { name: "Медицинский Университет Астана", city: "astana", dorm: true, military: true, minScore: 85, subjects: ["chem-bio"] },
-  { name: "ЮКУ им. М. Ауэзова", city: "shymkent", dorm: true, military: true, minScore: 60, subjects: ["math-phys", "chem-bio", "math-inf"] },
-  { name: "Южно-Казахстанская мед. академия", city: "shymkent", dorm: true, military: false, minScore: 80, subjects: ["chem-bio"] },
-  { name: "КарТУ им. Абылкаса Сагинова", city: "karaganda", dorm: true, military: true, minScore: 60, subjects: ["math-phys"] },
-  { name: "КарУ им. Е.А. Букетова", city: "karaganda", dorm: true, military: true, minScore: 65, subjects: ["math-phys", "chem-bio"] },
-  { name: "АРУ им. К. Жубанова", city: "aktobe", dorm: true, military: true, minScore: 60, subjects: ["math-phys", "chem-bio"] },
-  { name: "ЗКМУ им. М. Оспанова", city: "aktobe", dorm: true, military: true, minScore: 80, subjects: ["chem-bio"] },
-  { name: "ВКТУ им. Д. Серикбаева", city: "vko", dorm: true, military: true, minScore: 60, subjects: ["math-phys"] },
-  { name: "Университет Шакарима", city: "semey", dorm: true, military: true, minScore: 60, subjects: ["math-phys", "chem-bio"] },
-  { name: "ПГУ им. С. Торайгырова", city: "pavlodar", dorm: true, military: true, minScore: 60, subjects: ["math-phys"] },
-  { name: "КРУ им. А. Байтурсынова", city: "kostanay", dorm: true, military: true, minScore: 60, subjects: ["math-phys", "chem-bio"] },
-  { name: "Тару им. М.Х. Дулати", city: "taraz", dorm: true, military: true, minScore: 60, subjects: ["math-phys"] },
-  { name: "КГУ им. Коркыт Ата", city: "kYZYLORDA", dorm: true, military: true, minScore: 60, subjects: ["math-phys"] },
-  { name: "ЗКУ им. М. Утемисова", city: "uralsk", dorm: true, military: true, minScore: 60, subjects: ["math-phys"] },
-  { name: "Атырауский университет", city: "atyrau", dorm: true, military: true, minScore: 60, subjects: ["math-phys"] }
+  { name: "КазНУ им. аль-Фараби", city: "almaty", dorm: true, military: true, minScore: 75, paidScore: 50, price: "1 200 000 ₸", subjects: ["math-phys", "math-inf", "chem-bio", "geog-math", "hist-world"] },
+  { name: "Satbayev University", city: "almaty", dorm: true, military: true, minScore: 65, paidScore: 50, price: "1 300 000 ₸", subjects: ["math-phys", "math-inf"] },
+  { name: "МУИТ (IITU)", city: "almaty", dorm: true, military: true, minScore: 70, paidScore: 50, price: "1 150 000 ₸", subjects: ["math-inf", "math-phys"] },
+  { name: "KBTU (КБТУ)", city: "almaty", dorm: true, military: false, minScore: 85, paidScore: 60, price: "1 500 000 ₸", subjects: ["math-inf", "math-phys"] },
+  { name: "ЕНУ им. Л.Н. Гумилева", city: "astana", dorm: true, military: true, minScore: 75, paidScore: 50, price: "1 100 000 ₸", subjects: ["math-phys", "math-inf", "chem-bio", "geog-math"] },
+  { name: "Astana IT University (AITU)", city: "astana", dorm: true, military: true, minScore: 80, paidScore: 50, price: "1 250 000 ₸", subjects: ["math-inf"] },
+  { name: "ЮКУ им. М. Ауэзова", city: "shymkent", dorm: true, military: true, minScore: 60, paidScore: 50, price: "800 000 ₸", subjects: ["math-phys", "chem-bio", "math-inf"] },
+  { name: "КарТУ им. Абылкаса Сагинова", city: "karaganda", dorm: true, military: true, minScore: 60, paidScore: 50, price: "850 000 ₸", subjects: ["math-phys"] }
 ];
+
+const gopDatabase = {
+    "v062": { name: "B062 Информационные технологии (IT)", score: "~85–125", jobs: ["Software Developer", "Data Scientist", "Cybersecurity Specialist"] },
+    "v071": { name: "B071 Горное дело", score: "~75–95", jobs: ["Горный инженер", "Маркшейдер"] },
+    "v084": { name: "B084 Медицина", score: "~105–125", jobs: ["Врач общей практики", "Хирург"] },
+    "v044": { name: "B044 Финансы и экономика", score: "~85–115", jobs: ["Финансовый аналитик", "Экономист"] },
+    "v038": { name: "B038 Юриспруденция", score: "~100–125", jobs: ["Юрист", "Адвокат"] }
+};
 
 const translations = {
     ru: {
-        subtitle: "Рассчитай свои шансы на грант и найди подходящий ВУЗ в Казахстане",
+        subtitle: "Рассчитай шансы на грант, платное и выбери ВУЗ",
         tabCalc: "Калькулятор",
         tabGop: "ГОП и Профессии",
-        calcTitle: "Проверка шансов на грант ЕНТ",
+        calcTitle: "Проверка шансов ЕНТ (Грант / Платка / Порог)",
         labelScore: "Твой общий балл ЕНТ (из 140):",
         labelSubject: "Комбинация профильных предметов:",
         labelCity: "Выберите город:",
@@ -47,19 +38,19 @@ const translations = {
         checkDorm: "🏢 Нужно общежитие",
         checkMil: "🪖 Нужна военная кафедра",
         checkRural: "🌾 Есть сельская квота",
-        btnCalc: "Рассчитать шансы",
+        btnCalc: "🚀 Рассчитать шансы и доступные ВУЗы",
         gopTitle: "Группы образовательных программ (ГОП)",
         gopLabel: "Выберите направление:"
     },
     kz: {
-        subtitle: "Ғрантқа түсу мүмкіндігіңді есептеп, Қазақстандағы ыңғайлы ЖОО-ны тап",
+        subtitle: "Грант, ақылы бөлім мүмкіндігін есептеп, ЖОО таңда",
         tabCalc: "Калькулятор",
-        tabGop: "ГОП және Мамандықтар",
-        calcTitle: "ҰБТ грант мүмкіндігін тексеру",
+        tabGop: "ББТ және Мамандықтар",
+        calcTitle: "ҰБТ мүмкіндігін тексеру (Грант / Ақылы / Шек)",
         labelScore: "ҰБТ жалпы балың (140-тан):",
         labelSubject: "Бейіндік пәндер комбинациясы:",
         labelCity: "Қаланы таңдаңыз:",
-        optAllCities: "Қазақстанның барлық қалалары",
+        optAllCities: "Барлық қалалар",
         optPhysMath: "Физика + Математика",
         optMathInf: "Математика + Информатика",
         optChemBio: "Химия + Биология",
@@ -68,19 +59,19 @@ const translations = {
         checkDorm: "🏢 Жатақхана керек",
         checkMil: "🪖 Әскери кафедра керек",
         checkRural: "🌾 Ауылдық квота бар",
-        btnCalc: "Мүмкіндікті есептеу",
+        btnCalc: "🚀 Мүмкіндіктер мен ЖОО есептеу",
         gopTitle: "Білім беру бағдарламаларының топтары (ББТ)",
         gopLabel: "Бағытты таңдаңыз:"
     },
     en: {
-        subtitle: "Calculate your grant chances and find the right university in Kazakhstan",
+        subtitle: "Calculate grant, paid tuition chances and select a university",
         tabCalc: "Calculator",
         tabGop: "Programs & Jobs",
-        calcTitle: "UNT Grant Chance Calculator",
+        calcTitle: "UNT Chance Checker (Grant / Paid / Threshold)",
         labelScore: "Your total UNT score (out of 140):",
         labelSubject: "Profile subject combination:",
         labelCity: "Select city:",
-        optAllCities: "All cities in Kazakhstan",
+        optAllCities: "All cities",
         optPhysMath: "Physics + Mathematics",
         optMathInf: "Mathematics + Computer Science",
         optChemBio: "Chemistry + Biology",
@@ -89,11 +80,25 @@ const translations = {
         checkDorm: "🏢 Need dormitory",
         checkMil: "🪖 Need military department",
         checkRural: "🌾 Have rural quota",
-        btnCalc: "Calculate Chances",
+        btnCalc: "🚀 Calculate Chances & Universities",
         gopTitle: "Groups of Educational Programs",
         gopLabel: "Select direction:"
     }
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+    const gopSelect = document.getElementById('gop-select');
+    if (gopSelect) {
+        gopSelect.innerHTML = "";
+        for (let key in gopDatabase) {
+            let opt = document.createElement('option');
+            opt.value = key;
+            opt.innerText = gopDatabase[key].name;
+            gopSelect.appendChild(opt);
+        }
+        updateGopInfo();
+    }
+});
 
 function switchTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
@@ -131,46 +136,63 @@ function calculateGrant() {
     const resultDiv = document.getElementById('calc-result');
 
     if (isNaN(score) || score < 0 || score > 140) {
-        resultDiv.innerHTML = `<div style="padding:15px; background:#ffebee; border-left:5px solid #d32f2f; border-radius:6px; color:#c62828;">⚠️ <b>Ошибка:</b> Введите балл от 0 до 140.</div>`;
+        resultDiv.innerHTML = `<div style="padding:15px; background:#ffebee; border-left:5px solid #d32f2f; border-radius:6px; color:#c62828;">⚠️ Введите корректный балл от 0 до 140.</div>`;
         return;
     }
 
     const effectiveScore = isRuralQuota ? score + 5 : score;
 
+    // Проверка порога (обычно 50 баллов, для нац. вузов выше)
+    if (score < 50) {
+        resultDiv.innerHTML = `<div style="padding:15px; background:#ffebee; border-left:5px solid #d32f2f; border-radius:6px;">❌ <b>Ниже порогового балла (${score} баллов).</b><br>Вы не набрали минимальный порог для поступления в ВУЗы РК (нужно минимум 50).</div>`;
+        return;
+    }
+
+    // Фильтрация ВУЗов по гранту и платке
     const matchedUnis = universitiesData.filter(uni => {
         const matchesCity = (city === 'all' || uni.city === city);
         const matchesSubject = uni.subjects.includes(subject);
         const matchesDorm = !needDorm || uni.dorm;
         const matchesMilitary = !needMilitary || uni.military;
-        const matchesScore = effectiveScore >= uni.minScore;
-        return matchesCity && matchesSubject && matchesDorm && matchesMilitary && matchesScore;
+        const matchesThreshold = effectiveScore >= uni.paidScore; // Проходит хотя бы на платку
+        return matchesCity && matchesSubject && matchesDorm && matchesMilitary && matchesThreshold;
     });
 
     if (matchedUnis.length === 0) {
-        resultDiv.innerHTML = `<div style="padding:15px; background:#fff3e0; border-left:5px solid #ef6c00; border-radius:6px;"><h3>Подходящих ВУЗов не найдено</h3><p>Попробуйте смягчить фильтры или снизить требования к общежитию/военке.</p></div>`;
+        resultDiv.innerHTML = `<div style="padding:15px; background:#fff3e0; border-left:5px solid #ef6c00; border-radius:6px;"><h3>Подходящих ВУЗов не найдено</h3><p>Попробуйте изменить фильтры города или требований.</p></div>`;
     } else {
-        let html = `<div style="padding:15px; background:#f1f8e9; border-left:5px solid #2e7d32; border-radius:6px;"><h3>🎯 Найдено ВУЗов: ${matchedUnis.length}</h3><ul style="padding-left:20px; margin-top:10px;">`;
+        let html = `<div style="padding:15px; background:#f1f8e9; border-left:5px solid #2e7d32; border-radius:6px;">
+            <h3>📊 Результаты расчета для ${score} баллов:</h3>
+            <p>✅ Вы преодолели пороговый балл! Доступные варианты:</p>
+            <div style="margin-top:15px;">`;
+
         matchedUnis.forEach(uni => {
-            html += `<li style="margin-bottom:8px;"><strong>${uni.name}</strong> — <span style="color:#2e7d32; font-weight:bold;">${uni.minScore}+ балл</span><br><small>🏢 Общежитие: ${uni.dorm ? 'Есть' : 'Нет'} | 🪖 Военка: ${uni.military ? 'Есть' : 'Нет'}</small></li>`;
+            let isGrant = effectiveScore >= uni.minScore;
+            html += `
+                <div style="background:white; padding:12px; border-radius:8px; margin-bottom:10px; border:1px solid #c8e6c9;">
+                    <strong>${uni.name}</strong><br>
+                    ${isGrant ? '🔥 <span style="color:#2e7d32; font-weight:bold;">Есть шанс на ГРАНТ</span> (мин. грант ~' + uni.minScore + ')' : '💰 <span style="color:#f57c00; font-weight:bold;">Доступно на ПЛАТНОЕ отделение</span> (мин. платно: ' + uni.paidScore + ')'}<br>
+                    <small>💵 Стоимость контракта: <b>${uni.price} / год</b></small><br>
+                    <small>🏢 Общежитие: ${uni.dorm ? 'Есть' : 'Нет'} | 🪖 Военка: ${uni.military ? 'Есть' : 'Нет'}</small>
+                </div>`;
         });
-        html += `</ul></div>`;
+
+        html += `</div></div>`;
         resultDiv.innerHTML = html;
     }
 }
 
 function updateGopInfo() {
-    const gop = document.getElementById('gop-select').value;
-    const nameEl = document.getElementById('gop-name');
-    const profEl = document.getElementById('gop-professions');
+    const gopKey = document.getElementById('gop-select').value;
+    const data = gopDatabase[gopKey];
+    if (!data) return;
 
-    if(gop === 'v071') {
-        nameEl.innerText = "B071 Горное дело и добыча полезных ископаемых";
-        profEl.innerHTML = "<li>Горный инженер</li><li>Маркшейдер</li><li>Инженер по буровым работам</li>";
-    } else if(gop === 'v062') {
-        nameEl.innerText = "B062 Информационные технологии (IT)";
-        profEl.innerHTML = "<li>Software Developer / Программист</li><li>Data Scientist</li><li>Cybersecurity Specialist</li>";
-    } else if(gop === 'v059') {
-        nameEl.innerText = "B059 Коммуникации и связи";
-        profEl.innerHTML = "<li>Инженер телекоммуникаций</li><li>Специалист по сетям 5G</li>";
-    }
+    document.getElementById('gop-name').innerText = data.name;
+    let profEl = document.getElementById('gop-professions');
+    profEl.innerHTML = "";
+    data.jobs.forEach(job => {
+        let li = document.createElement('li');
+        li.innerText = job;
+        profEl.appendChild(li);
+    });
 }
