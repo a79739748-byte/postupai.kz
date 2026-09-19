@@ -3,56 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поступай KZ — Калькулятор шансов и поиск ВУЗов Казахстана</title>
-    
-    <!-- Подтверждение Google Search Console -->
-    <meta name="google-site-verification" content="v_qE13_4I6iHO4actouf1DeoCIwjNW5HT1ld0wz6t7s" />
-
+    <title>Поступай KZ — Калькулятор шансов и выбор ВУЗа</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <div class="container">
-            <h1>Поступай KZ</h1>
-            <p>Подбор ВУЗов и калькулятор шансов поступления на грант</p>
-        </div>
+        <h1>Поступай KZ 🎓</h1>
+        <p>Калькулятор шансов на грант и каталог ВУЗов Казахстана</p>
     </header>
 
     <main class="container">
-        <section class="calculator-card">
-            <h2>Расчёт шансов на грант ЕНТ</h2>
+        <!-- Блок калькулятора -->
+        <section class="card">
+            <h2>Проверь свои шансы на грант</h2>
             
-            <div class="form-group">
-                <label for="score">Ваш балл ЕНТ:</label>
-                <input type="number" id="score" placeholder="Например: 110" min="0" max="140">
-            </div>
+            <label for="score">Твой балл ЕНТ:</label>
+            <input type="number" id="score" placeholder="Например: 110" min="0" max="140">
 
-            <div class="form-group">
-                <label for="direction">Профильные предметы / Направление:</label>
-                <select id="direction">
-                    <option value="">-- Выберите профиль --</option>
-                    <option value="fizmat">Физика - Математика</option>
-                    <option value="mat-inf">Математика - Информатика</option>
-                    <option value="eng">Иностранный язык - История</option>
-                    <option value="geo">География - Математика</option>
-                    <option value="creative">Творческий экзамен</option>
-                </select>
-            </div>
+            <label for="subject">Профильные предметы:</label>
+            <select id="subject">
+                <option value="phys-math">Физика + Математика</option>
+                <option value="math-inf">Математика + Информатика</option>
+                <option value="eng-hist">Английский + История</option>
+                <option value="geo-math">География + Математика</option>
+            </select>
 
-            <button onclick="calculateChances()">Рассчитать шансы</button>
+            <button onclick="checkChances()">Рассчитать шансы</button>
 
-            <div id="resultBlock" class="result-block">
-                Введите данные и нажмите «Рассчитать шансы»
+            <div id="result" class="result-box">
+                Введите балл и выберите предметы для расчета.
             </div>
         </section>
-    </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Поступай KZ. Все права защищены.</p>
-        </div>
-    </footer>
+        <!-- Блок поиска ВУЗов -->
+        <section class="card">
+            <h2>Быстрый поиск ВУЗа</h2>
+            <input type="text" id="searchInput" onkeyup="searchUniversity()" placeholder="Поиск по названию или городу...">
+            
+            <ul id="uniList" class="uni-list">
+                <li class="uni-item">
+                    <strong>Satbayev University (Политех)</strong> — Алматы
+                    <span class="tag">Физмат / IT</span>
+                </li>
+                <li class="uni-item">
+                    <strong>ЕНУ им. Л.Н. Гумилева</strong> — Астана
+                    <span class="tag">Универсальный</span>
+                </li>
+                <li class="uni-item">
+                    <strong>МУИТ (IITU)</strong> — Алматы
+                    <span class="tag">IT / Информатика</span>
+                </li>
+                <li class="uni-item">
+                    <strong>KBTU (КБТУ)</strong> — Алматы
+                    <span class="tag">IT / Инженерия</span>
+                </li>
+                <li class="uni-item">
+                    <strong>AUPET (Энерго)</strong> — Алматы
+                    <span class="tag">Энергетика / Физика</span>
+                </li>
+            </ul>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
