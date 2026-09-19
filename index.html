@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поступай KZ — Калькулятор шансов на грант ЕНТ и подбор ВУЗа</title>
+    
+    <!-- Подтверждение владения сайтом в Google Search Console -->
+    <meta name="google-site-verification" content="v_qE13_4I6iHO4actouf1DeoCIwjNW5HT1ld0wz6t7s" />
+    
+    <!-- SEO-описание для поиска Google -->
+    <meta name="description" content="Рассчитай свои шансы на грант ЕНТ в Казахстане. Удобный подбор ВУЗов по профильным предметам и баллам.">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Шапка сайта с переключением языков -->
     <header class="header">
         <div class="container header-content">
             <div>
@@ -18,15 +24,15 @@
             
             <!-- Переключатель языков -->
             <div class="lang-switch">
-                <button type="button" onclick="changeLanguage('ru')" class="lang-btn active" id="btn-ru">РУС</button>
-                <button type="button" onclick="changeLanguage('kz')" class="lang-btn" id="btn-kz">ҚАЗ</button>
-                <button type="button" onclick="changeLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
+                <button type="button" onclick="changeLanguage('ru')" class="lang-btn active" id="btn-ru">RU</button>
+                <button type="button" onclick="changeLanguage('kz')" class="lang-btn" id="btn-kz">KZ</button>
+                <button type="button" onclick="changeLanguage('en')" class="lang-btn" id="btn-en">EN</button>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <!-- Блок Калькулятора -->
+        <!-- Блок калькулятора -->
         <section class="card">
             <h2 id="calc-title">Проверка шансов на грант ЕНТ</h2>
             
@@ -38,79 +44,122 @@
             <div class="form-group">
                 <label for="subject" id="subject-label">Комбинация профильных предметов:</label>
                 <select id="subject" onchange="filterUniversities()">
-                    <option value="phys-math">Физика — Математика</option>
-                    <option value="math-info">Математика — Информатика</option>
-                    <option value="chem-bio">Химия — Биология</option>
-                    <option value="creative">Творческий экзамен</option>
-                    <option value="geo-eng">География — Английский язык</option>
+                    <option value="phys-math">Физика + Математика</option>
+                    <option value="math-inf">Математика + Информатика</option>
+                    <option value="chem-bio">Химия + Биология</option>
+                    <option value="bio-geo">Биология + География</option>
+                    <option value="eng-hist">Английский + Всемирная история</option>
+                    <option value="geo-math">География + Математика</option>
                 </select>
             </div>
 
-            <button type="button" onclick="checkChances()" class="btn-primary" id="btn-calc">Рассчитать шансы</button>
+            <button onclick="checkChances()" id="calc-btn">Рассчитать шансы</button>
 
-            <!-- Результат расчета -->
             <div id="result" class="result-box">
                 Введите балл и нажмите «Рассчитать шансы».
             </div>
         </section>
 
-        <!-- Блок Поиска и Каталога ВУЗов -->
+        <!-- Блок поиска и списка ВУЗов -->
         <section class="card">
             <h2 id="search-title">Поиск ВУЗов Казахстана</h2>
-            <input type="text" id="searchInput" onkeyup="searchUniversity()" placeholder="Поиск по названию или городу..." class="search-input">
-
-            <div id="uniList" class="uni-list">
-                <div class="uni-item" data-category="phys-math math-info chem-bio">
-                    <div>
-                        <h3>КазНУ им. аль-Фараби</h3>
-                        <p class="city">📍 Алматы</p>
+            <input type="text" id="searchInput" onkeyup="searchUniversity()" placeholder="Поиск по названию или городу (например: Алматы, КазНМУ, Политех)...">
+            
+            <ul id="uniList" class="uni-list">
+                <!-- Физмат / IT -->
+                <li class="uni-item" data-category="phys-math math-inf">
+                    <div class="uni-info">
+                        <strong>Satbayev University (КазНИТУ / Политех)</strong>
+                        <span class="uni-city">📍 Алматы | Мин. балл на грант: ~90–110</span>
                     </div>
-                    <span class="badge">Национальный ВУЗ</span>
-                </div>
+                    <span class="tag">Физмат / IT / Инженерия</span>
+                </li>
 
-                <div class="uni-item" data-category="phys-math math-info">
-                    <div>
-                        <h3>КазНТУ (Satbayev University)</h3>
-                        <p class="city">📍 Алматы</p>
+                <li class="uni-item" data-category="math-inf phys-math">
+                    <div class="uni-info">
+                        <strong>МУИТ (IITU)</strong>
+                        <span class="uni-city">📍 Алматы | Мин. балл на грант: ~100–120</span>
                     </div>
-                    <span class="badge">Технический</span>
-                </div>
+                    <span class="tag">IT / Информатика</span>
+                </li>
 
-                <div class="uni-item" data-category="phys-math math-info">
-                    <div>
-                        <h3>МУИТ (IITU)</h3>
-                        <p class="city">📍 Алматы</p>
+                <li class="uni-item" data-category="phys-math math-inf">
+                    <div class="uni-info">
+                        <strong>КБТУ (KBTU)</strong>
+                        <span class="uni-city">📍 Алматы | Мин. балл на грант: ~115–130</span>
                     </div>
-                    <span class="badge">IT ВУЗ</span>
-                </div>
+                    <span class="tag">IT / Нефтегаз / Финансы</span>
+                </li>
 
-                <div class="uni-item" data-category="phys-math math-info chem-bio creative geo-eng">
-                    <div>
-                        <h3>ЕНУ им. Л.Н. Гумилева</h3>
-                        <p class="city">📍 Астана</p>
+                <li class="uni-item" data-category="phys-math">
+                    <div class="uni-info">
+                        <strong>Energo University (АУЭС)</strong>
+                        <span class="uni-city">📍 Алматы | Мин. балл на грант: ~80–100</span>
                     </div>
-                    <span class="badge">Национальный ВУЗ</span>
-                </div>
+                    <span class="tag">Энергетика / Физика</span>
+                </li>
 
-                <div class="uni-item" data-category="phys-math math-info">
-                    <div>
-                        <h3>AITU (Astana IT University)</h3>
-                        <p class="city">📍 Астана</p>
+                <li class="uni-item" data-category="math-inf phys-math">
+                    <div class="uni-info">
+                        <strong>AITU (Astana IT University)</strong>
+                        <span class="uni-city">📍 Астана | Мин. балл на грант: ~110–125</span>
                     </div>
-                    <span class="badge">IT ВУЗ</span>
-                </div>
+                    <span class="tag">IT / Кибербезопасность</span>
+                </li>
 
-                <div class="uni-item" data-category="chem-bio">
-                    <div>
-                        <h3>КазНМУ им. Асфендиярова</h3>
-                        <p class="city">📍 Алматы</p>
+                <!-- Медицина / Биология -->
+                <li class="uni-item" data-category="chem-bio">
+                    <div class="uni-info">
+                        <strong>КазНМУ им. С.Д. Асфендиярова</strong>
+                        <span class="uni-city">📍 Алматы | Мин. балл на грант: ~110–130</span>
                     </div>
-                    <span class="badge">Медицинский</span>
-                </div>
-            </div>
+                    <span class="tag">Медицина / Фармация</span>
+                </li>
+
+                <li class="uni-item" data-category="chem-bio">
+                    <div class="uni-info">
+                        <strong>Медицинский университет Астана (МУА)</strong>
+                        <span class="uni-city">📍 Астана | Мин. балл на грант: ~105–125</span>
+                    </div>
+                    <span class="tag">Медицина / Стоматология</span>
+                </li>
+
+                <li class="uni-item" data-category="chem-bio bio-geo">
+                    <div class="uni-info">
+                        <strong>КазНУ (Факультет биологии и биотехнологии)</strong>
+                        <span class="uni-city">📍 Алматы | Мин. балл на грант: ~95–115</span>
+                    </div>
+                    <span class="tag">Биотехнология / Биология</span>
+                </li>
+
+                <!-- Многопрофильные и Гуманитарные ВУЗы -->
+                <li class="uni-item" data-category="phys-math math-inf chem-bio bio-geo eng-hist geo-math">
+                    <div class="uni-info">
+                        <strong>КазНУ им. аль-Фараби</strong>
+                        <span class="uni-city">📍 Алматы | Мин. балл на грант: ~105–125</span>
+                    </div>
+                    <span class="tag">Национальный ВУЗ</span>
+                </li>
+
+                <li class="uni-item" data-category="phys-math math-inf chem-bio bio-geo eng-hist geo-math">
+                    <div class="uni-info">
+                        <strong>ЕНУ им. Л.Н. Гумилева</strong>
+                        <span class="uni-city">📍 Астана | Мин. балл на грант: ~95–120</span>
+                    </div>
+                    <span class="tag">Национальный ВУЗ</span>
+                </li>
+
+                <li class="uni-item" data-category="eng-hist geo-math">
+                    <div class="uni-info">
+                        <strong>КазУМОиМЯ им. Абылай хана</strong>
+                        <span class="uni-city">📍 Алматы | Мин. балл на грант: ~95–115</span>
+                    </div>
+                    <span class="tag">Языки / Гуманитарный</span>
+                </li>
+            </ul>
         </section>
     </main>
 
     <script src="script.js"></script>
 </body>
-</html>
+</html>S
