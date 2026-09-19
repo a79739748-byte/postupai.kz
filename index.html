@@ -3,47 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поступай KZ — Справочник и Калькулятор ЕНТ</title>
+    <title>Поступай KZ — Калькулятор ЕНТ и Грантов</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="app-layout">
-        <!-- Боковая панель навигации (Sidebar) -->
-        <aside class="sidebar">
-            <div class="logo">
-                <h2>Поступай KZ 🎓</h2>
-            </div>
-            <nav class="nav-menu">
-                <button class="nav-btn active" onclick="switchTab('calc-tab', this)">
-                    🧮 Калькулятор шансов
-                </button>
-                <button class="nav-btn" onclick="switchTab('gop-tab', this)">
-                    🎯 ГОП и Про профессии
-                </button>
-                <button class="nav-btn" onclick="switchTab('uni-tab', this)">
-                    🏛 Каталог ВУЗов
-                </button>
-                <button class="nav-btn" onclick="switchTab('faq-tab', this)">
-                    ❓ Вопросы и ответы (FAQ)
-                </button>
-            </nav>
-        </aside>
+    <div class="app-header">
+        <h1>Поступай KZ 🎓</h1>
+        <p>Калькулятор шансов на грант, специальности (ГОП) и каталог ВУЗов Казахстана</p>
+    </div>
 
-        <!-- Основной контент -->
-        <main class="main-content">
+    <!-- Навигация вкладками -->
+    <nav class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab('calc-tab', this)">🧮 Калькулятор</button>
+        <button class="tab-btn" onclick="switchTab('gop-tab', this)">🎯 ГОП и Профессии</button>
+        <button class="tab-btn" onclick="switchTab('uni-tab', this)">🏛 ВУЗы и Контакты</button>
+        <button class="tab-btn" onclick="switchTab('faq-tab', this)">❓ Вопросы (FAQ)</button>
+    </nav>
 
-            <!-- Вкладка 1: Калькулятор -->
-            <section id="calc-tab" class="tab-content active">
-                <div class="card">
-                    <h2>Рассчитать шансы на грант</h2>
-                    <p class="subtitle">Укажи свой балл и комбинацию предметов для оценки шансов</p>
-                    
-                    <label for="score">Твой общий балл ЕНТ:</label>
+    <main class="main-container">
+
+        <!-- Вкладка 1: Калькулятор -->
+        <section id="calc-tab" class="tab-content active">
+            <div class="card">
+                <h2>Проверка шансов на грант</h2>
+                <p class="subtitle">Укажи свои баллы и комбинацию предметов</p>
+                
+                <div class="form-group">
+                    <label for="score">Твой общий балл ЕНТ (из 140):</label>
                     <input type="number" id="score" placeholder="Например: 105" min="0" max="140">
+                </div>
 
-                    <label for="subject">Комбинация предметов:</label>
-                    <select id="subject">
+                <div class="form-group">
+                    <label for="subject">Комбинация профильных предметов:</label>
+                    <select id="subject" onchange="updateGopOptions()">
                         <option value="phys-math">Физика + Математика</option>
                         <option value="math-inf">Математика + Информатика</option>
                         <option value="eng-hist">Иностранный язык + Всемирная история</option>
@@ -51,97 +44,118 @@
                         <option value="bio-chem">Биология + Химия</option>
                         <option value="kaz-lit">Казахский / Русский язык + Литература</option>
                     </select>
-
-                    <button onclick="checkChances()">Рассчитать шансы</button>
-
-                    <div id="result" class="result-box">
-                        Введите балл и нажмите кнопку выше.
-                    </div>
                 </div>
-            </section>
 
-            <!-- Вкладка 2: ГОП и Профессии -->
-            <section id="gop-tab" class="tab-content">
-                <div class="card">
-                    <h2>Группы образовательных программ (ГОП)</h2>
-                    <p class="subtitle">Выберите специальность, чтобы узнать минимальный балл гранта прошлых лет и список профессий:</p>
+                <button class="btn-primary" onclick="checkChances()">🚀 Рассчитать шансы на грант</button>
 
-                    <label for="gopSelect">Выберите направление (ГОП):</label>
+                <div id="result" class="result-box">
+                    Введите балл и нажмите «Рассчитать шансы».
+                </div>
+            </div>
+        </section>
+
+        <!-- Вкладка 2: ГОП и Профессии -->
+        <section id="gop-tab" class="tab-content">
+            <div class="card">
+                <h2>Группы образовательных программ (ГОП)</h2>
+                <p class="subtitle">Выбери предметы или конкретное направление, чтобы узнать проходные баллы и профессии:</p>
+
+                <div class="form-group">
+                    <label for="gopSelect">Направление (ГОП):</label>
                     <select id="gopSelect" onchange="showGopDetails()">
-                        <option value="b057">B057 — Информационные технологии</option>
-                        <option value="b058">B058 — Информационная безопасность</option>
-                        <option value="b062">B062 — Электротехника и энергетика</option>
-                        <option value="b053">B053 — Физика</option>
-                        <option value="b054">B054 — Математика и статистика</option>
+                        <!-- Заполняется автоматически через JavaScript -->
                     </select>
+                </div>
 
-                    <div id="gopDetails" class="gop-info-card">
-                        <!-- Динамически заполняется через JS -->
+                <div id="gopDetails" class="gop-details-box">
+                    <!-- Заполняется динамически -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Вкладка 3: Каталог ВУЗов -->
+        <section id="uni-tab" class="tab-content">
+            <div class="card">
+                <h2>Каталог ВУЗов Казахстана</h2>
+                <div class="form-group">
+                    <input type="text" id="searchInput" onkeyup="searchUniversity()" placeholder="🔍 Поиск по названию или городу (например: Алматы, Астана, Политех)...">
+                </div>
+                
+                <div id="uniList" class="uni-grid">
+                    <div class="uni-card">
+                        <h3>Satbayev University (Политех)</h3>
+                        <span class="city-tag">📍 Алматы</span>
+                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~85–110</p>
+                        <p class="contact-info">📞 <a href="tel:+77273201212">+7 (727) 320-12-12</a></p>
+                        <p class="contact-info">🌐 <a href="https://satbayev.university" target="_blank">satbayev.university</a></p>
+                    </div>
+
+                    <div class="uni-card">
+                        <h3>КазНУ им. аль-Фараби</h3>
+                        <span class="city-tag">📍 Алматы</span>
+                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~105–125</p>
+                        <p class="contact-info">📞 <a href="tel:+77273773330">+7 (727) 377-33-30</a></p>
+                        <p class="contact-info">🌐 <a href="https://kaznu.kz" target="_blank">kaznu.kz</a></p>
+                    </div>
+
+                    <div class="uni-card">
+                        <h3>МУИТ (IITU)</h3>
+                        <span class="city-tag">📍 Алматы</span>
+                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~100–120</p>
+                        <p class="contact-info">📞 <a href="tel:+77272445103">+7 (727) 244-51-03</a></p>
+                        <p class="contact-info">🌐 <a href="https://iitu.edu.kz" target="_blank">iitu.edu.kz</a></p>
+                    </div>
+
+                    <div class="uni-card">
+                        <h3>ЕНУ им. Л.Н. Гумилева</h3>
+                        <span class="city-tag">📍 Астана</span>
+                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~95–120</p>
+                        <p class="contact-info">📞 <a href="tel:+77172703030">+7 (7172) 70-30-30</a></p>
+                        <p class="contact-info">🌐 <a href="https://enu.kz" target="_blank">enu.kz</a></p>
+                    </div>
+
+                    <div class="uni-card">
+                        <h3>AITU (Astana IT University)</h3>
+                        <span class="city-tag">📍 Астана</span>
+                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~110–125</p>
+                        <p class="contact-info">📞 <a href="tel:+77172645710">+7 (7172) 64-57-10</a></p>
+                        <p class="contact-info">🌐 <a href="https://astanait.edu.kz" target="_blank">astanait.edu.kz</a></p>
+                    </div>
+
+                    <div class="uni-card">
+                        <h3>АУЭС (Energo University)</h3>
+                        <span class="city-tag">📍 Алматы</span>
+                        <p class="score-info"><strong>Мин. балл на грант:</strong> ~80–100</p>
+                        <p class="contact-info">📞 <a href="tel:+77273231175">+7 (727) 323-11-75</a></p>
+                        <p class="contact-info">🌐 <a href="https://aues.kz" target="_blank">aues.kz</a></p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Вкладка 3: ВУЗы -->
-            <section id="uni-tab" class="tab-content">
-                <div class="card">
-                    <h2>Каталог ВУЗов Казахстана</h2>
-                    <input type="text" id="searchInput" onkeyup="searchUniversity()" placeholder="Поиск по названию или городу (например: Алматы, КазНУ, Астана)...">
-                    
-                    <div id="uniList" class="uni-grid">
-                        <div class="uni-card">
-                            <h3>Satbayev University (Политех)</h3>
-                            <p class="city">📍 Алматы</p>
-                            <p><strong>Порог на грант:</strong> ~85–110 баллов</p>
-                            <p>📞 <a href="tel:+77273201212">+7 (727) 320-12-12</a></p>
-                            <p>🌐 <a href="https://satbayev.university" target="_blank">satbayev.university</a></p>
-                        </div>
+        <!-- Вкладка 4: FAQ -->
+        <section id="faq-tab" class="tab-content">
+            <div class="card">
+                <h2>Часто задаваемые вопросы (FAQ)</h2>
+                
+                <details class="faq-item">
+                    <summary>Какой минимальный пороговый балл для подачи на грант?</summary>
+                    <p>Для национальных ВУЗов (КазНУ, ЕНУ и др.) — минимум 75 баллов. Для остальных ВУЗов — от 50 баллов. По педагогическим направлениям — от 75 баллов.</p>
+                </details>
 
-                        <div class="uni-card">
-                            <h3>КазНУ им. аль-Фараби</h3>
-                            <p class="city">📍 Алматы</p>
-                            <p><strong>Порог на грант:</strong> ~105–125 баллов</p>
-                            <p>📞 <a href="tel:+77273773330">+7 (727) 377-33-30</a></p>
-                            <p>🌐 <a href="https://kaznu.kz" target="_blank">kaznu.kz</a></p>
-                        </div>
+                <details class="faq-item">
+                    <summary>Сколько ВУЗов и ГОП можно указать в конкурсе грантов?</summary>
+                    <p>В заявке на грант вы можете указать до 4 групп образовательных программ (ГОП).</p>
+                </details>
 
-                        <div class="uni-card">
-                            <h3>МУИТ (IITU)</h3>
-                            <p class="city">📍 Алматы</p>
-                            <p><strong>Порог на грант:</strong> ~100–120 баллов</p>
-                            <p>📞 <a href="tel:+77272445103">+7 (727) 244-51-03</a></p>
-                            <p>🌐 <a href="https://iitu.edu.kz" target="_blank">iitu.edu.kz</a></p>
-                        </div>
+                <details class="faq-item">
+                    <summary>Что такое сельская квота?</summary>
+                    <p>Сельская квота даёт преимущество при распределении грантов выпускникам сельских школ (35% от грантов по сельским специальностям).</p>
+                </details>
+            </div>
+        </section>
 
-                        <div class="uni-card">
-                            <h3>ЕНУ им. Л.Н. Гумилева</h3>
-                            <p class="city">📍 Астана</p>
-                            <p><strong>Порог на грант:</strong> ~95–120 баллов</p>
-                            <p>📞 <a href="tel:+77172703030">+7 (7172) 70-30-30</a></p>
-                            <p>🌐 <a href="https://enu.kz" target="_blank">enu.kz</a></p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Вкладка 4: FAQ -->
-            <section id="faq-tab" class="tab-content">
-                <div class="card">
-                    <h2>Вопросы и ответы (FAQ)</h2>
-                    
-                    <details class="faq-item">
-                        <summary>Какой минимальный пороговый балл для подачи на грант?</summary>
-                        <p>Для национальных ВУЗов (КазНУ, ЕНУ и др.) — минимум 75 баллов. Для остальных ВУЗов — от 50 баллов.</p>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Сколько ВУЗов и ГОП можно указать в конкурсе грантов?</summary>
-                        <p>В заявке на грант можно указать до 4 групп образовательных программ (ГОП).</p>
-                    </details>
-                </div>
-            </section>
-
-        </main>
-    </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
