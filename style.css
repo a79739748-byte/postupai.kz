@@ -109,4 +109,8 @@ button:hover {
     border-radius: 6px;
     font-size: 12px;
     font-weight: bold;
+}button, .lang-btn {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
